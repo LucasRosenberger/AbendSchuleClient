@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Abend Schule</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div style="position: absolute;   top: 50%; left: 50%;   margin: -100px 0 0 -100px;">
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="username" matInput placeholder="Username" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+    <br/>
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}"matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </mat-form-field>
+  </form>
+  <br/>
+  <button (click)="doSend()" mat-button>Login</button>
+</div>

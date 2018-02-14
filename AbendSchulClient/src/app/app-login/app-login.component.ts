@@ -30,10 +30,9 @@ export class AppLoginComponent implements OnInit {
         this.router.navigate(['/user', this.username]);
       }
       else{
-        this.snackBar.open("Daten wurden gesendet.", "OK",{
+        this.snackBar.open("Password ist falsch.", "OK",{
           duration: 5000,
         });
       }
   }
-
 }

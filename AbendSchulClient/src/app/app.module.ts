@@ -13,7 +13,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
@@ -73,7 +72,6 @@ const appRoutes : Routes = [
     RouterModule.forRoot(appRoutes,
       { enableTracing: true }
     ),
-    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
     HttpClientModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, HttpService],

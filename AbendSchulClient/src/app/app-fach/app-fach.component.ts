@@ -19,4 +19,7 @@ export class AppFachComponent implements OnInit {
   ngOnInit() {
   }
 
+  send(){
+    this.num.emit(this.fach.id);
+  }
 }

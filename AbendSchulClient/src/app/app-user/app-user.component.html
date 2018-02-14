@@ -5,5 +5,5 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-nav-list *ngFor="let fach of untericht; let i=index" (click)="event(i)">
-  <app-fach [fach]=fach></app-fach>
+  <app-fach [fach]=fach (num)="picked(i)"></app-fach>
 </mat-nav-list>

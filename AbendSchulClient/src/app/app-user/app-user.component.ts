@@ -17,12 +17,12 @@ export class AppUserComponent implements OnInit {
   schueler : Person;
   HTTPService : HttpService;
   id : string;
+  pickedFacher : Facher[] = [];
 
   constructor(http : HttpService, public snackBar: MatSnackBar, private router: Router, private route: ActivatedRoute) {
     this.HTTPService = http;
     this.id = this.route.snapshot.paramMap.get('id');
     this.HTTPService.getUser(this.id).subscribe(result => this.schueler = result);;
-    console.log(this.schueler);
     this.HTTPService.getABIF().subscribe(result => this.untericht = result);;
    }
 
@@ -31,10 +31,26 @@ export class AppUserComponent implements OnInit {
 
 
   event(i : number){
+  
+  }
 
+  picked(i : number){
+    var x = this.untericht.findIndex(b => b.id == i);
+    var y = this.pickedFacher.includes(this.untericht[x])
+    console.log(y);
+    if(y){
+      var index = this.pickedFacher.findIndex(b => b.id == i);
+      this.pickedFacher.splice(index, 1);
+      console.log(this.pickedFacher);
+    }
+    else{
+      this.pickedFacher.push(Object.assign({}, this.untericht[x]));
+      console.log(JSON.stringify(this.pickedFacher));
+    }
   }
 
   doSend(){
+    console.log(this.schueler);
     this.snackBar.open("Daten wurden gesendet.", "OK",{
       duration: 5000,
     });

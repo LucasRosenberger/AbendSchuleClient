@@ -24,15 +24,16 @@ export class AppLoginComponent implements OnInit {
   }
 
     doSend() : void { 
-      this.HTTPService.getOK(this.username, this.password).subscribe(result => this.ok = result);
-      console.log(this.ok);
-      if(this.ok == 1){
-        this.router.navigate(['/user', this.username]);
-      }
-      else{
-        this.snackBar.open("Password ist falsch.", "OK",{
-          duration: 5000,
-        });
-      }
+      this.HTTPService.getOK(this.username, this.password).subscribe(result => {
+        this.ok = result
+        if(this.ok == 1){
+          this.router.navigate(['/user', this.username]);
+        }
+        else{
+          this.snackBar.open("Password ist falsch.", "OK",{
+            duration: 5000,
+          });
+        }
+      });
+    }
   }
-}

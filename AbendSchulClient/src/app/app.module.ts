@@ -25,6 +25,8 @@ import { AppUserComponent } from './app-user/app-user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './http.service';
 import { AppFachComponent } from './app-fach/app-fach.component';
+import * as $ from 'jquery';
+import { AppAdminComponent } from './app-admin/app-admin.component';
 
 const appRoutes : Routes = [
   {
@@ -35,6 +37,10 @@ const appRoutes : Routes = [
   {
     path: 'user/:id',
     component: AppUserComponent,
+  },
+  {
+    path: 'admin/:id',
+    component: AppAdminComponent,
   },
   {
     path: 'login',
@@ -51,7 +57,8 @@ const appRoutes : Routes = [
     AppComponent,
     AppLoginComponent,
     AppUserComponent,
-    AppFachComponent
+    AppFachComponent,
+    AppAdminComponent
   ],
   imports: [
     BrowserModule,

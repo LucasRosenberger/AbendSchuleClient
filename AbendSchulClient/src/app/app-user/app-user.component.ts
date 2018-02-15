@@ -23,7 +23,15 @@ export class AppUserComponent implements OnInit {
     this.HTTPService = http;
     this.id = this.route.snapshot.paramMap.get('id');
     this.HTTPService.getUser(this.id).subscribe(result => this.schueler = result);;
-    this.HTTPService.getABIF().subscribe(result => this.untericht = result);;
+    this.HTTPService.getABIF().subscribe(result => {
+      this.untericht = result;
+      this.HTTPService.getPicked(this.id).subscribe(resultPicked => {
+        for(var i = 0; i < resultPicked.length; i++){
+          this.pickedFacher.push(Object.assign({}, this.untericht.find(b => b.id == resultPicked[i].gegenstandid)));
+        }
+        console.log(this.pickedFacher);
+      });;
+    });;
    }
 
   ngOnInit() {
@@ -35,22 +43,21 @@ export class AppUserComponent implements OnInit {
   }
 
   picked(i : number){
-    var x = this.untericht.findIndex(b => b.id == i);
-    var y = this.pickedFacher.includes(this.untericht[x])
-    console.log(y);
-    if(y){
-      var index = this.pickedFacher.findIndex(b => b.id == i);
+    var x = this.untericht.find(b => b.id == this.untericht[i].id);
+    var z = this.pickedFacher.find(b => b.id == x.id);
+    if(z != undefined){
+      var index = this.pickedFacher.findIndex(b => b.id == x.id);
       this.pickedFacher.splice(index, 1);
-      console.log(this.pickedFacher);
     }
     else{
-      this.pickedFacher.push(Object.assign({}, this.untericht[x]));
-      console.log(JSON.stringify(this.pickedFacher));
+      this.pickedFacher.push(Object.assign({}, x));
     }
   }
 
   doSend(){
-    console.log(this.schueler);
+    let x : number[] = [];
+    this.pickedFacher.forEach(b => x.push(b.id));
+    this.HTTPService.sendPicked(x, this.id);
     this.snackBar.open("Daten wurden gesendet.", "OK",{
       duration: 5000,
     });

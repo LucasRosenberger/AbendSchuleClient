@@ -8,3 +8,11 @@ export class Facher{
 
     }
 }
+
+export class Gegenstand{
+    constructor(
+        public gegenstandid : number
+    ){
+        
+    }
+}

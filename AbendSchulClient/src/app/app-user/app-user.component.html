@@ -1,9 +1,12 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>Abend Schule</span>
-    <button (click)="doSend()" mat-button>Send</button>
+    <button (click)="doSend()" style="margin-left: auto;" mat-button>Send</button>
   </mat-toolbar-row>
 </mat-toolbar>
-<mat-nav-list *ngFor="let fach of untericht; let i=index" (click)="event(i)">
-  <app-fach [fach]=fach (num)="picked(i)"></app-fach>
-</mat-nav-list>
+<div>
+  <br/>
+  <mat-nav-list *ngFor="let fach of untericht; let i=index" (click)="event(i)">
+    <app-fach [fach]=fach (num)="picked(i)"></app-fach>
+  </mat-nav-list>
+</div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Facher } from './Facher';
+import { Facher, Gegenstand } from './Facher';
 import { Person } from './Person';
 
 @Injectable()
@@ -22,17 +22,23 @@ export class HttpService {
 
   public getOK(username : string, password : string){
     this.request = 'http://localhost:6969/AllowedUser/'+ username;
-    return this.http.post<number>(this.request, password);
+    return this.http.post<number>(this.request, $.param({ 'password' : password }), {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
   }
 
   public getUser(username : string){
     this.request = 'http://localhost:6969/getUser/'+ username;
-    console.log(this.request);
     return this.http.get<Person>(this.request);
   }
 
-  sendPicked(picked : string[], username : string){
+  public getPicked(username : string){
+    this.request = 'http://localhost:6969/getPickedFacher/'+ username;
+    return this.http.get<Gegenstand[]>(this.request);
+  }
+
+  sendPicked(picked : number[], username : string){
     this.request = 'http://localhost:6969/setPicked/'+ username;
-    return this.http.post<number>(this.request, picked);
+    return this.http.post<number>(this.request, $.param({ 'picked' : picked }), {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
   }
 }

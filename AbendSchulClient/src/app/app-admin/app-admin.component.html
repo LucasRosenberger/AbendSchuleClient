@@ -1,5 +1,67 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <span>Abend Schule</span>
-    </mat-toolbar-row>
-  </mat-toolbar>
+  <mat-toolbar-row>
+    <span>Abend Schule</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-toolbar>
+  <span>Schüler Hinzufügen </span>
+</mat-toolbar>
+<input [(ngModel)]="file" id="pupilfile" name="pupilfile" type="file" accept=".csv">
+<button mat-button (click)="getpupils()">Submit</button>
+<button mat-button (click)="showPupils()">Show</button>
+<button mat-button style="float: right" (click)="sendPupils()">Send</button>
+<mat-table [dataSource]="dataSourcePupils">
+  <ng-container matColumnDef="klasse">
+    <mat-header-cell *matHeaderCellDef> Klasse </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.klasse}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="firstname">
+    <mat-header-cell *matHeaderCellDef> Vorname </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.firstname}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="lastname">
+    <mat-header-cell *matHeaderCellDef> Nachname </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="Del">
+    <mat-header-cell *matHeaderCellDef> Löschen </mat-header-cell>
+    <mat-cell *matCellDef="let row; let i=index;">
+      <button mat-icon-button (click)="deleteItemPupils(i)">
+        <mat-icon aria-label="Delete">delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumnsPupils"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumnsPupils;"></mat-row>
+</mat-table>
+<mat-toolbar>
+  <span>Gegenstände Hinzufügen</span>
+</mat-toolbar>
+<input [(ngModel)]="file" id="fachfile" name="fachfile" type="file" accept=".csv">
+<button mat-button (click)="getFacher()">Submit</button>
+<button mat-button (click)="showFacher()">Show</button>
+<button mat-button style="float: right" (click)="sendFacher()">Send</button>
+<mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="Fach">
+      <mat-header-cell *matHeaderCellDef> Kurzbezeichnung </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Fach}} </mat-cell>
+    </ng-container>
+      <ng-container matColumnDef="Kolleg">
+      <mat-header-cell *matHeaderCellDef> Fach </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Kolleg}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Sem">
+      <mat-header-cell *matHeaderCellDef> Semester </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Sem}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Del">
+      <mat-header-cell *matHeaderCellDef> Löschen </mat-header-cell>
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button (click)="deleteItem(i)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

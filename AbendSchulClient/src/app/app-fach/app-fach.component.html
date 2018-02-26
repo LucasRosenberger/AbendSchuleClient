@@ -3,5 +3,5 @@
     <mat-card-title>{{fach.Kolleg}} {{fach.Fach}}</mat-card-title>
     <mat-card-subtitle>Semester: {{fach.Sem}}</mat-card-subtitle>
   </mat-card-header>
-  <mat-checkbox [(ngModel)]="toggle" (click)="send()">Besuchen</mat-checkbox>
+  <mat-checkbox [(ngModel)]="this.fach.picked" (click)="send()">Besuchen</mat-checkbox>
 </mat-card>

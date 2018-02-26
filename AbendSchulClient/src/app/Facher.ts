@@ -1,9 +1,10 @@
 export class Facher{
     constructor(
         public id : number,
-        public Kolleg : String,
-        public Fach : String,
-        public Sem : number
+        public Kolleg : string,
+        public Fach : string,
+        public Sem : number,
+        public picked : boolean
     ){
 
     }
@@ -14,5 +15,14 @@ export class Gegenstand{
         public gegenstandid : number
     ){
         
+    }
+}
+
+export class Session{
+    constructor(
+        public sessionstring : string,
+        public id : number
+    ){
+
     }
 }

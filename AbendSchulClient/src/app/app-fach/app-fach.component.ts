@@ -10,10 +10,8 @@ export class AppFachComponent implements OnInit {
 
   @Input() fach : Facher;
   @Output() num : EventEmitter<number> = new EventEmitter<number>();
-  toggle : boolean;
 
   constructor() {
-    this.toggle = false;
    }
 
   ngOnInit() {

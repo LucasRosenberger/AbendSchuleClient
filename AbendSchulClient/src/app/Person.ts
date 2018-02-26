@@ -1,9 +1,9 @@
 export class Person{
     constructor(
         public id : number,
-        public Klasse : String,
-        public FirstName : String,
-        public LastName : String
+        public klasse : string,
+        public firstname : string,
+        public lastname : string
     ){
 
     }

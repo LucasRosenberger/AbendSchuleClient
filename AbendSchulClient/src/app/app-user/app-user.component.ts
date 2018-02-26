@@ -18,19 +18,44 @@ export class AppUserComponent implements OnInit {
   HTTPService : HttpService;
   id : string;
   pickedFacher : Facher[] = [];
-
+  startpicked : Facher[] = [];
+ 
   constructor(http : HttpService, public snackBar: MatSnackBar, private router: Router, private route: ActivatedRoute) {
     this.HTTPService = http;
     this.id = this.route.snapshot.paramMap.get('id');
-    this.HTTPService.getUser(this.id).subscribe(result => this.schueler = result);;
-    this.HTTPService.getABIF().subscribe(result => {
-      this.untericht = result;
-      this.HTTPService.getPicked(this.id).subscribe(resultPicked => {
-        for(var i = 0; i < resultPicked.length; i++){
-          this.pickedFacher.push(Object.assign({}, this.untericht.find(b => b.id == resultPicked[i].gegenstandid)));
+    this.HTTPService.getUser(this.id).subscribe(user =>{
+      this.schueler = user[0];
+      if(user[0].id != 0){
+        if(user[0].klasse.replace(/[0-9]/,"").toUpperCase() == "ABIF"){
+          this.HTTPService.getABIF().subscribe(result => {
+            this.untericht = result;
+            this.HTTPService.getPicked(this.id).subscribe(resultPicked => {
+              for(var i = 0; i < resultPicked.length; i++){
+                var x = this.untericht.findIndex(b => b.id == resultPicked[i].gegenstandid);
+                this.pickedFacher.push(Object.assign({}, this.untericht[x]));
+                this.untericht[x].picked = true;             
+              }
+              this.pickedFacher.forEach(b => this.startpicked.push(b));
+            });;
+          });;
         }
-        console.log(this.pickedFacher);
-      });;
+        else if(user[0].klasse.replace(/[0-9]/,"").toUpperCase() == "AKIF"){
+          this.HTTPService.getAKIF().subscribe(result => {
+            this.untericht = result;
+            this.HTTPService.getPicked(this.id).subscribe(resultPicked => {
+              for(var i = 0; i < resultPicked.length; i++){
+                var x = this.untericht.findIndex(b => b.id == resultPicked[i].gegenstandid);
+                this.pickedFacher.push(Object.assign({}, this.untericht[x]));
+                this.untericht[x].picked = true;   
+              }
+              this.pickedFacher.forEach(b => this.startpicked.push(b));
+            });;
+          });;
+        }
+      }
+      else{
+        this.router.navigate(['/login']);
+      }
     });;
    }
 
@@ -55,11 +80,24 @@ export class AppUserComponent implements OnInit {
   }
 
   doSend(){
-    let x : number[] = [];
-    this.pickedFacher.forEach(b => x.push(b.id));
-    this.HTTPService.sendPicked(x, this.id);
-    this.snackBar.open("Daten wurden gesendet.", "OK",{
-      duration: 5000,
+    let deletetedpicked : number[] = [];
+    let newpicked : number[] = [];
+    let startpickednumerarr : number[] = [];
+    this.startpicked.forEach(b => startpickednumerarr.push(b.id));
+    this.pickedFacher.forEach(b => newpicked.push(b.id));
+    for(var x = 0; x < this.startpicked.length; x++){
+      if(!newpicked.includes(startpickednumerarr[x])){
+        deletetedpicked.push(startpickednumerarr[x]);
+      }
+      else{
+        newpicked.splice(newpicked.findIndex(b => b == startpickednumerarr[x]), 1);
+      }
+    }
+    this.HTTPService.sendPicked(newpicked, deletetedpicked, this.id).subscribe(result =>{ 
+      var x = result;
+      this.snackBar.open("Daten wurden gesendet.", "OK",{
+        duration: 5000,
+      });
     });
   }
 }

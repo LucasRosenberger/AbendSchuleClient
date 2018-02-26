@@ -12,6 +12,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTableModule} from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 
@@ -25,8 +26,8 @@ import { AppUserComponent } from './app-user/app-user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './http.service';
 import { AppFachComponent } from './app-fach/app-fach.component';
-import * as $ from 'jquery';
 import { AppAdminComponent } from './app-admin/app-admin.component';
+import * as $ from 'jquery';
 
 const appRoutes : Routes = [
   {
@@ -76,6 +77,7 @@ const appRoutes : Routes = [
     MatIconModule,
     MatListModule,
     MatSlideToggleModule,
+    MatTableModule,
     RouterModule.forRoot(appRoutes,
       { enableTracing: true }
     ),

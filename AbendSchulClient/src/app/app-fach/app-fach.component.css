@@ -1,5 +1,6 @@
 .example-card {
-    min-width: 400px;
+    min-width: 300px;
+    max-width: 600px;
     float: left;
     margin-left: 10px;
     margin-right: 10px;

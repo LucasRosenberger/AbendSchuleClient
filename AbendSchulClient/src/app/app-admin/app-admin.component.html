@@ -40,6 +40,13 @@
 <input [(ngModel)]="file" id="fachfile" name="fachfile" type="file" accept=".csv">
 <button mat-button (click)="getFacher()">Submit</button>
 <button mat-button (click)="showFacher()">Show</button>
+<mat-form-field>
+    <mat-select placeholder="Wählen sie eine Klasse" [(value)]="pickedKlass">
+      <mat-option *ngFor="let klass of klasses" [value]="pickedKlass">
+        {{ klass }}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
 <button mat-button style="float: right" (click)="sendFacher()">Send</button>
 <mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="Fach">

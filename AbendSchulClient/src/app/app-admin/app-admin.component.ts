@@ -20,6 +20,8 @@ export class AppAdminComponent implements OnInit {
   dataSource = new MatTableDataSource<Facher>(this.facher);
   displayedColumnsPupils = ['klasse', 'firstname', 'lastname', 'Del'];
   dataSourcePupils = new MatTableDataSource<Person>(this.peoples);
+  klasses = ["AKIF", "ABIF"];
+  pickedKlass = "";
   
   constructor(private elem : ElementRef, private router: Router, http : HttpService, private route: ActivatedRoute, public snackBar: MatSnackBar) {  
     this.HTTPService = http;
@@ -89,7 +91,7 @@ export class AppAdminComponent implements OnInit {
   }
 
   public sendFacher(){
-    this.HTTPService.sendNewFächer(this.facher, this.id).subscribe(result =>{ 
+    this.HTTPService.sendNewFächer(this.facher, this.pickedKlass, this.id).subscribe(result =>{ 
       var x = result;
       this.snackBar.open("Daten wurden gesendet.", "OK",{
         duration: 5000,

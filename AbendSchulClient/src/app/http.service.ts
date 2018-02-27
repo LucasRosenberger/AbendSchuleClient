@@ -48,9 +48,9 @@ export class HttpService {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
   }
 
-  public sendNewFächer(picked : Facher[], username : string){
+  public sendNewFächer(picked : Facher[], klass : string,  username : string){
     this.request = 'http://localhost:6969/sendnewFacher/'+ username;
-    return this.http.post<number>(this.request, $.param({ 'newFacher' : picked }), {
+    return this.http.post<number>(this.request, $.param({ 'newFacher' : picked, 'klass' :  klass}), {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
   }
 }
